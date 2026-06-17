@@ -1,68 +1,69 @@
-# Smaller file size but doesnt accept number value
-# Encode
-def rle_encode(text):
-    if not text:
-        return ""
-
-    result = ""
-    count = 1
-
-    for i in range(1, len(text)):
-        if text[i] == text[i-1]:
-            count += 1
-        else:
-            result += text[i-1] + str(count)
-            count = 1
-
-    result += text[-1] + str(count)
-
-    return result
-
-# Decode
-def rle_decode(data):
-    result = ""
-    i = 0
-
-    while i < len(data):
-        char = data[i]
-        i += 1
-
-        count = ""
-        while i < len(data) and data[i].isdigit():
-            count += data[i]
-            i += 1
-
-        result += char * int(count)
-
-    return result
-
-# # Encode and Decode V2: Accept number value but higher compressed size
+# # Read Horizontally
+# # Smaller compressed file size but doesnt accept number value
+# # Encode
 # def rle_encode(text):
 #     if not text:
 #         return ""
 
-#     encoded = []
+#     result = ""
 #     count = 1
 
 #     for i in range(1, len(text)):
 #         if text[i] == text[i-1]:
 #             count += 1
 #         else:
-#             encoded.append(f"{count}:{text[i-1]}")
+#             result += text[i-1] + str(count)
 #             count = 1
 
-#     encoded.append(f"{count}:{text[-1]}")
+#     result += text[-1] + str(count)
 
-#     return "|".join(encoded)
+#     return result
 
-# def rle_decode(encoded):
-#     decoded = ""
+# # Decode
+# def rle_decode(data):
+#     result = ""
+#     i = 0
 
-#     for item in encoded.split("|"):
-#         count, char = item.split(":", 1)
-#         decoded += char * int(count)
+#     while i < len(data):
+#         char = data[i]
+#         i += 1
 
-#     return decoded
+#         count = ""
+#         while i < len(data) and data[i].isdigit():
+#             count += data[i]
+#             i += 1
+
+#         result += char * int(count)
+
+#     return result
+
+# Encode and Decode V2: Accept number value but higher compressed file size
+def rle_encode(text):
+    if not text:
+        return ""
+
+    encoded = []
+    count = 1
+
+    for i in range(1, len(text)):
+        if text[i] == text[i-1]:
+            count += 1
+        else:
+            encoded.append(f"{count}:{text[i-1]}")
+            count = 1
+
+    encoded.append(f"{count}:{text[-1]}")
+
+    return "|".join(encoded)
+
+def rle_decode(encoded):
+    decoded = ""
+
+    for item in encoded.split("|"):
+        count, char = item.split(":", 1)
+        decoded += char * int(count)
+
+    return decoded
 
 
 # Read CSV

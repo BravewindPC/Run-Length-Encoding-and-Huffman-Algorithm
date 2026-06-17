@@ -91,8 +91,8 @@ filename = input("Insert File Name: ")
 with open(filename, "r", encoding="utf-8") as f:
     text = f.read()
 
-print("Original:")
-print(text)
+# print("Original:")
+# print(text)
 
 # Encode
 encoded, tree, codes = huffman_encode(text)
@@ -101,13 +101,13 @@ print("\nHuffman Codes")
 for ch in sorted(codes.keys()):
     print(repr(ch), ":", codes[ch])
 
-print("\nEncoded:")
-print(encoded)
+# print("\nEncoded:")
+# print(encoded)
 
 # Decode
 decoded = huffman_decode(encoded, tree)
-print("\nDecoded:")
-print(decoded)
+# print("\nDecoded:")
+# print(decoded)
 
 # Verify
 print("\nVerification:")
